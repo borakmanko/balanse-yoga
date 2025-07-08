@@ -1,116 +1,131 @@
 import React from 'react';
-import { Sunrise, Moon, Dumbbell, Heart, Users, Clock } from 'lucide-react';
+import { Heart, Users, Clock, Award, Zap, Moon } from 'lucide-react';
 
 interface ServicesProps {
-  onBookingClick?: () => void;
+  onBookingClick: () => void;
 }
 
 const Services: React.FC<ServicesProps> = ({ onBookingClick }) => {
   const services = [
     {
-      icon: Sunrise,
-      title: "Morning Flow",
-      description: "Start your day with energizing sequences that awaken your body and mind",
-      duration: "60 min",
-      level: "All Levels",
-      image: "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
+      icon: Heart,
+      title: 'Hatha Yoga',
+      description: 'Gentle, slow-paced yoga focusing on basic postures and breathing techniques.',
+      duration: '60 min',
+      level: 'Beginner',
+      color: 'from-rose-500 to-pink-500'
+    },
+    {
+      icon: Zap,
+      title: 'Vinyasa Flow',
+      description: 'Dynamic sequences that link movement and breath in a flowing practice.',
+      duration: '75 min',
+      level: 'Intermediate',
+      color: 'from-emerald-500 to-teal-500'
+    },
+    {
+      icon: Award,
+      title: 'Ashtanga',
+      description: 'Traditional, vigorous style of yoga with a set sequence of poses.',
+      duration: '90 min',
+      level: 'Advanced',
+      color: 'from-orange-500 to-red-500'
     },
     {
       icon: Moon,
-      title: "Evening Restore",
-      description: "Gentle, restorative poses to unwind and prepare for peaceful sleep",
-      duration: "45 min",
-      level: "Beginner",
-      image: "https://images.pexels.com/photos/3822864/pexels-photo-3822864.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
-    },
-    {
-      icon: Dumbbell,
-      title: "Power Yoga",
-      description: "Dynamic, strength-building sequences for experienced practitioners",
-      duration: "75 min",
-      level: "Advanced",
-      image: "https://images.pexels.com/photos/3822652/pexels-photo-3822652.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
-    },
-    {
-      icon: Heart,
-      title: "Prenatal Yoga",
-      description: "Safe, nurturing practice designed specifically for expecting mothers",
-      duration: "50 min",
-      level: "All Levels",
-      image: "https://images.pexels.com/photos/3822847/pexels-photo-3822847.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
+      title: 'Restorative Yoga',
+      description: 'Relaxing practice using props to support the body in restful poses.',
+      duration: '60 min',
+      level: 'All Levels',
+      color: 'from-purple-500 to-indigo-500'
     },
     {
       icon: Users,
-      title: "Partner Yoga",
-      description: "Deepen connections through shared poses and breathing exercises",
-      duration: "60 min",
-      level: "Intermediate",
-      image: "https://images.pexels.com/photos/3822864/pexels-photo-3822864.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
+      title: 'Hot Yoga',
+      description: 'Yoga practiced in a heated room to enhance flexibility and detoxification.',
+      duration: '60 min',
+      level: 'Intermediate',
+      color: 'from-yellow-500 to-orange-500'
     },
     {
       icon: Clock,
-      title: "Quick Flow",
-      description: "Efficient 30-minute sessions perfect for busy schedules",
-      duration: "30 min",
-      level: "All Levels",
-      image: "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
+      title: 'Power Yoga',
+      description: 'Fitness-based vinyasa practice with strength-building poses.',
+      duration: '45 min',
+      level: 'Advanced',
+      color: 'from-blue-500 to-cyan-500'
     }
   ];
 
   return (
     <section id="services" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Classes
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Our Yoga Classes
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Choose from our diverse range of yoga classes, each designed to meet you where you are 
-            in your practice and guide you toward your wellness goals.
+            Discover the perfect class for your journey. From gentle beginners' sessions 
+            to challenging advanced practices, we have something for everyone.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div key={index} className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="relative overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute top-4 left-4 bg-emerald-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  {service.level}
-                </div>
-              </div>
-              
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="bg-emerald-100 p-3 rounded-full mr-4">
-                    <service.icon className="w-6 h-6 text-emerald-600" />
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {services.map((service, index) => {
+            const IconComponent = service.icon;
+            return (
+              <div
+                key={index}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group hover:-translate-y-2"
+              >
+                <div className={`h-2 bg-gradient-to-r ${service.color}`}></div>
+                <div className="p-8">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <IconComponent className="w-8 h-8 text-white" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900">{service.title}</h3>
-                    <div className="flex items-center text-gray-500 text-sm mt-1">
-                      <Clock size={14} className="mr-1" />
-                      {service.duration}
+                  
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    {service.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center space-x-4">
+                      <span className="flex items-center text-gray-500">
+                        <Clock className="w-4 h-4 mr-1" />
+                        {service.duration}
+                      </span>
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${service.color} text-white`}>
+                        {service.level}
+                      </span>
                     </div>
                   </div>
                 </div>
-                
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  {service.description}
-                </p>
-                
-                <button 
-                  onClick={onBookingClick}
-                  className="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors duration-200"
-                >
-                  Book Class
-                </button>
               </div>
-            </div>
-          ))}
+            );
+          })}
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center">
+          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl p-8 text-white">
+            <h3 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h3>
+            <p className="text-xl mb-6 opacity-90">
+              Join thousands of students who have transformed their lives through yoga
+            </p>
+            <button
+              onClick={onBookingClick}
+              className="inline-flex items-center px-8 py-4 bg-white text-emerald-600 font-semibold rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all duration-200 shadow-lg"
+            >
+              Book Your First Class
+              <Heart className="ml-2 w-5 h-5" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

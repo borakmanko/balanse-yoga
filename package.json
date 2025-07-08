@@ -2,7 +2,7 @@
   "name": "authentication",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+ 
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -11,8 +11,12 @@
   },
   "dependencies": {
     "authentication": "file:",
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "firebase": "^10.14.1",
     "lucide-react": "^0.523.0",
+    "mysql2": "^3.14.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1"

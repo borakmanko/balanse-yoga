@@ -15,6 +15,7 @@ interface WeekSchedulerProps {
   selectedDate: string | null;
   onClose: () => void;
   onBookClass: (event: BookingEvent) => void;
+  loading?: boolean;
 }
 
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -63,7 +64,7 @@ for (let h = START_HOUR; h < END_HOUR; h++) {
 }
 timeSlots.push(`${END_HOUR}:00`);
 
-const WeekScheduler: React.FC<WeekSchedulerProps> = ({ events, selectedDate, onClose, onBookClass }) => {
+const WeekScheduler: React.FC<WeekSchedulerProps> = ({ events, selectedDate, onClose, onBookClass, loading = false }) => {
   if (!selectedDate) {
     return null;
   }
@@ -125,16 +126,6 @@ const WeekScheduler: React.FC<WeekSchedulerProps> = ({ events, selectedDate, onC
   // Track which slots are already rendered as part of a booking
   const renderedSlots: { [key: string]: boolean } = {};
 
-  // Helper to check if a slot is occupied by any booking
-  function isSlotOccupied(dayIdx: number, slot: string) {
-    const slotStart = timeToMinutes(slot);
-    return bookingsByDay[dayIdx].some(b => {
-      const bStart = timeToMinutes(b.timeIn);
-      const bEnd = timeToMinutes(b.timeOut);
-      return slotStart >= bStart && slotStart < bEnd;
-    });
-  }
-
   // Check if the selected date is in this week
   const selectedDateObj = new Date(selectedDate);
   const isSelectedWeek = weekDates.some(date => 
@@ -157,7 +148,8 @@ const WeekScheduler: React.FC<WeekSchedulerProps> = ({ events, selectedDate, onC
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors p-2"
+            disabled={loading}
+            className="text-gray-400 hover:text-gray-600 transition-colors p-2 disabled:opacity-50"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -166,6 +158,15 @@ const WeekScheduler: React.FC<WeekSchedulerProps> = ({ events, selectedDate, onC
         </div>
         
         <div className="p-6 overflow-auto max-h-[calc(90vh-120px)]">
+          {loading && (
+            <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-10">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600 mx-auto mb-4"></div>
+                <p className="text-gray-600">Booking your class...</p>
+              </div>
+            </div>
+          )}
+          
           <div className="overflow-x-auto">
             <table className="w-full border-collapse min-w-[800px]">
               <thead>
@@ -223,9 +224,13 @@ const WeekScheduler: React.FC<WeekSchedulerProps> = ({ events, selectedDate, onC
                           <td
                             key={key}
                             rowSpan={span}
-                            className={`border border-gray-300 px-3 py-2 ${bookingColor} text-center relative group cursor-pointer hover:shadow-lg transition-all duration-200`}
+                            className={`border border-gray-300 px-3 py-2 ${bookingColor} text-center relative group transition-all duration-200 ${
+                              isAvailable && !loading 
+                                ? 'cursor-pointer hover:shadow-lg hover:scale-105' 
+                                : 'cursor-default'
+                            } ${loading ? 'opacity-50' : ''}`}
                             style={{ minWidth: 140 }}
-                            onClick={() => isAvailable && onBookClass(booking)}
+                            onClick={() => isAvailable && !loading && onBookClass(booking)}
                           >
                             <div className="space-y-1">
                               <div className="font-semibold text-sm text-gray-800">
@@ -237,8 +242,8 @@ const WeekScheduler: React.FC<WeekSchedulerProps> = ({ events, selectedDate, onC
                               <div className="text-xs text-gray-600">
                                 Coach: {booking.instructorName}
                               </div>
-                              {isAvailable && (
-                                <div className="text-xs font-semibold text-emerald-600 mt-2">
+                              {isAvailable && !loading && (
+                                <div className="text-xs font-semibold text-emerald-600 mt-2 animate-pulse">
                                   Click to Book
                                 </div>
                               )}
@@ -250,24 +255,26 @@ const WeekScheduler: React.FC<WeekSchedulerProps> = ({ events, selectedDate, onC
                             </div>
                             
                             {/* Enhanced Tooltip */}
-                            <div className="absolute left-1/2 top-full z-20 hidden w-64 -translate-x-1/2 rounded-lg bg-white p-4 text-xs text-gray-800 shadow-xl border-2 border-gray-200 group-hover:block mt-2">
-                              <div className="space-y-2">
-                                <div className="font-semibold text-sm border-b pb-2">Class Details</div>
-                                <div><span className="font-medium">Class:</span> {booking.classType}</div>
-                                <div><span className="font-medium">Instructor:</span> {booking.instructorName}</div>
-                                <div><span className="font-medium">Time:</span> {formatTime12h(booking.timeIn)} - {formatTime12h(booking.timeOut)}</div>
-                                <div><span className="font-medium">Status:</span> 
-                                  <span className={isAvailable ? 'text-emerald-600 font-semibold' : 'text-red-600 font-semibold'}>
-                                    {isAvailable ? ' Available' : ' Booked'}
-                                  </span>
-                                </div>
-                                {isAvailable && (
-                                  <div className="text-emerald-600 font-medium text-center pt-2 border-t">
-                                    Click to book this class
+                            {!loading && (
+                              <div className="absolute left-1/2 top-full z-20 hidden w-64 -translate-x-1/2 rounded-lg bg-white p-4 text-xs text-gray-800 shadow-xl border-2 border-gray-200 group-hover:block mt-2">
+                                <div className="space-y-2">
+                                  <div className="font-semibold text-sm border-b pb-2">Class Details</div>
+                                  <div><span className="font-medium">Class:</span> {booking.classType}</div>
+                                  <div><span className="font-medium">Instructor:</span> {booking.instructorName}</div>
+                                  <div><span className="font-medium">Time:</span> {formatTime12h(booking.timeIn)} - {formatTime12h(booking.timeOut)}</div>
+                                  <div><span className="font-medium">Status:</span> 
+                                    <span className={isAvailable ? 'text-emerald-600 font-semibold' : 'text-red-600 font-semibold'}>
+                                      {isAvailable ? ' Available' : ' Booked'}
+                                    </span>
                                   </div>
-                                )}
+                                  {isAvailable && (
+                                    <div className="text-emerald-600 font-medium text-center pt-2 border-t">
+                                      Click to book this class
+                                    </div>
+                                  )}
+                                </div>
                               </div>
-                            </div>
+                            )}
                           </td>
                         );
                       } else {

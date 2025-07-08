@@ -5,7 +5,7 @@ import Services from "./assets/components/Services";
 import Instructors from "./assets/components/Instructors";
 import Testimonials from "./assets/components/Testimonials";
 import Footer from "./assets/components/Footer";
-import BookingPage from "./assets/components/BookingPage";
+import BookingPage from "./assets/components/booking/BookingPage";
 import { useState } from "react";
 
 function App() {
