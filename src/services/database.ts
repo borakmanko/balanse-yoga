@@ -105,11 +105,11 @@ export const uploadProfilePicture = async (file: File, firebaseUid: string): Pro
     formData.append('profilePicture', file);
     formData.append('firebaseUid', firebaseUid);
     
-    const response = await axios.post(`${API_BASE_URL}/upload/profile-picture`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+   const response = await axios.post(
+  `${API_BASE_URL}/upload/profile-picture?firebaseUid=${firebaseUid}`,
+  formData,
+  { headers: { 'Content-Type': 'multipart/form-data' } }
+);
     
     return response.data.imageUrl;
   } catch (error) {

@@ -83,7 +83,7 @@ const Navigation: React.FC<NavigationProps> = ({ onBookingClick, onHomeClick }) 
               onClick={onHomeClick}
               className="flex items-center space-x-2 group"
             >
-              <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+              <div className="w-8 h-8 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
                 <Heart className="w-4 h-4 text-white" fill="white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
@@ -135,9 +135,9 @@ const Navigation: React.FC<NavigationProps> = ({ onBookingClick, onHomeClick }) 
               <div className="relative">
                 <button
                   onClick={() => setShowProfileMenu(!showProfileMenu)}
-                  className="flex items-center space-x-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-lg p-2 hover:bg-gray-50 transition-colors duration-200"
+                  className="flex items-center space-x-3 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2 rounded-lg p-2 hover:bg-gray-50 transition-colors duration-200"
                 >
-                  <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-emerald-200">
+                  <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-emerald-300">
                     {userProfile?.profilePicture ? (
                       <img
                         src={userProfile.profilePicture}
@@ -145,7 +145,7 @@ const Navigation: React.FC<NavigationProps> = ({ onBookingClick, onHomeClick }) 
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-emerald-100 flex items-center justify-center">
+                      <div className="w-full h-full bg-emerald-300 flex items-center justify-center">
                         <User className="w-4 h-4 text-emerald-600" />
                       </div>
                     )}
@@ -192,7 +192,7 @@ const Navigation: React.FC<NavigationProps> = ({ onBookingClick, onHomeClick }) 
                 </a>
                 <a 
                   href="/signup"
-                  className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors"
+                  className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-600 transition-colors"
                 >
                   <UserPlus size={16} />
                   <span>Sign Up</span>
@@ -252,7 +252,7 @@ const Navigation: React.FC<NavigationProps> = ({ onBookingClick, onHomeClick }) 
                 {user ? (
                   <div className="space-y-2">
                     <div className="px-3 py-2 flex items-center space-x-3">
-                      <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-emerald-200">
+                      <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-emerald-300">
                         {userProfile?.profilePicture ? (
                           <img
                             src={userProfile.profilePicture}
@@ -260,7 +260,7 @@ const Navigation: React.FC<NavigationProps> = ({ onBookingClick, onHomeClick }) 
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full bg-emerald-100 flex items-center justify-center">
+                          <div className="w-full h-full bg-emerald-300 flex items-center justify-center">
                             <User className="w-4 h-4 text-emerald-600" />
                           </div>
                         )}
@@ -299,7 +299,7 @@ const Navigation: React.FC<NavigationProps> = ({ onBookingClick, onHomeClick }) 
                     </a>
                     <a 
                       href="/signup"
-                      className="flex items-center justify-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700"
+                      className="flex items-center justify-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-800"
                     >
                       <UserPlus size={16} />
                       <span>Sign Up</span>

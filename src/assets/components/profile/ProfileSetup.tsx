@@ -111,6 +111,7 @@ const ProfileSetup: React.FC<ProfileSetupProps> = ({ onComplete }) => {
       // Upload profile picture if selected
       if (profilePictureFile) {
         profilePictureUrl = await uploadProfilePicture(profilePictureFile, user.uid);
+         setProfilePicturePreview(profilePictureUrl); 
       } else if (selectedAvatar) {
         profilePictureUrl = selectedAvatar;
       }
