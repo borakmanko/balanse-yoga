@@ -7,12 +7,17 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node
 node_modules
+
+# Vite SSR
 dist-ssr
+
+# Local env
 *.local
+*.env
 
-
-# Editor directories and files
+# Editor
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -22,4 +27,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-*.env
+
+# Optional
+# Uncomment this ONLY if you don't want to include source code
+src
