@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, MapPin, Calendar, Heart, Upload, Check } from 'lucide-react';
+import { User, MapPin, Heart, Upload, Check } from 'lucide-react';
 import { UserProfile } from '../../../types/user';
 import { createUserProfile, uploadProfilePicture } from '../../../services/database';
 import { getAuth } from 'firebase/auth';

@@ -4,9 +4,9 @@ import App from './App.tsx'
 import Login from './assets/components/auth/Login.tsx'
 import Signup from './assets/components/auth/Signup.tsx'
 import './index.css'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { initializeApp } from "firebase/app";
-import AuthRoute from './assets/components/auth/AuthRoute.tsx'
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCK4MsecfdAYYQxejmkeLWp5z4TQertKCg",

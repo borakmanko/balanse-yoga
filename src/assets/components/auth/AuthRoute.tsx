@@ -13,8 +13,8 @@ const AuthRoute: React.FunctionComponent<IAuthRouteProps> = (props) => {
     const { children } = props;
     const auth = getAuth();
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState<any>(null);
-    const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+    const [_user, setUser] = useState<any>(null);
+    const [_userProfile, setUserProfile] = useState<UserProfile | null>(null);
     const [needsProfileSetup, setNeedsProfileSetup] = useState(false);
 
     useEffect(() => {

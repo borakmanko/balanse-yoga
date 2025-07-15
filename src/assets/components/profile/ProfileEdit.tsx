@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { User, MapPin, Heart, Upload, X, Save } from "lucide-react";
+import React, { useState } from "react";
+import { User, Heart, Upload, X, Save } from "lucide-react";
 import { UserProfile } from "../../../types/user";
 import {
   updateUserProfile,
   uploadProfilePicture,
 } from "../../../services/database";
 import { getAuth } from "firebase/auth";
-import { getUserProfile } from "../../../services/database"; // Import this
+
 
 interface ProfileEditProps {
   profile: UserProfile;
