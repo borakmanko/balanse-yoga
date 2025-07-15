@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, User, UserPlus, Calendar, Heart, LogOut } from 'lucide-react';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { UserProfile } from '../../types/user';
 import { getUserProfile } from '../../services/database';
 import ProfileEdit from './profile/ProfileEdit';
@@ -183,20 +184,18 @@ const Navigation: React.FC<NavigationProps> = ({ onBookingClick, onHomeClick }) 
               </div>
             ) : (
               <>
-                <a 
-                  href="/login"
+                <Link to="/login"
                   className="flex items-center space-x-2 text-gray-700 hover:text-emerald-600 px-3 py-2 text-sm font-medium transition-colors"
                 >
                   <User size={16} />
                   <span>Log In</span>
-                </a>
-                <a 
-                  href="/signup"
+                </Link>
+                <Link to="/signup"
                   className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-600 transition-colors"
                 >
                   <UserPlus size={16} />
                   <span>Sign Up</span>
-                </a>
+                </Link>
               </>
             )}
           </div>
@@ -290,20 +289,18 @@ const Navigation: React.FC<NavigationProps> = ({ onBookingClick, onHomeClick }) 
                   </div>
                 ) : (
                   <div className="flex flex-col space-y-2">
-                    <a 
-                      href="/login"
+                    < Link to ="/login"
                       className="flex items-center justify-center space-x-2 text-gray-700 hover:text-emerald-600 px-3 py-2 text-sm font-medium"
                     >
                       <User size={16} />
                       <span>Log In</span>
-                    </a>
-                    <a 
-                      href="/signup"
+                    </Link>
+                    <Link to="/signup"
                       className="flex items-center justify-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-800"
                     >
                       <UserPlus size={16} />
                       <span>Sign Up</span>
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>
