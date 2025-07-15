@@ -42,7 +42,7 @@ app.post("/api/upload/profile-picture", upload.single("profilePicture"), (req, r
     return res.status(400).json({ error: "No file uploaded" });
   }
   // Validate file type
-  const imageUrl = `http://localhost:3001/uploads/${req.file.filename}`;
+ const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
   res.json({ imageUrl });
 });
 
@@ -136,7 +136,9 @@ app.post("/api/users", async (req, res) => {
 
   // Log the incoming request body for debugging
   console.log("Received profile data:", req.body);
-
+  function toNull(value) {
+    return value === undefined || value === null || value === "" ? null : value;
+  }
   try {
     const [result] = await pool.execute(
       `INSERT INTO users (firebase_uid, first_name, middle_name, last_name, age, city, state, gender, custom_gender, profile_picture, preferences, bio)
