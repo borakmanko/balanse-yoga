@@ -5,6 +5,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -141,14 +142,15 @@ app.post("/api/users", async (req, res) => {
   }
   try {
     const [result] = await pool.execute(
-      `INSERT INTO users (firebase_uid, first_name, middle_name, last_name, age, city, state, gender, custom_gender, profile_picture, preferences, bio)
+      `INSERT INTO users (firebase_uid,role, first_name, middle_name, last_name, age, city, state, gender, custom_gender, profile_picture, preferences, bio)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
        ON DUPLICATE KEY UPDATE
-         first_name=VALUES(first_name), middle_name=VALUES(middle_name), last_name=VALUES(last_name),
+         role=VALUES(role),first_name=VALUES(first_name), middle_name=VALUES(middle_name), last_name=VALUES(last_name),
          age=VALUES(age), city=VALUES(city), state=VALUES(state), gender=VALUES(gender), custom_gender=VALUES(custom_gender),
          profile_picture=VALUES(profile_picture), preferences=VALUES(preferences), bio=VALUES(bio)`,
       [
         toNull(firebaseUid),
+        toNull(role),
         toNull(firstName),
         toNull(middleName),
         toNull(lastName),
@@ -177,6 +179,7 @@ function mapUserRowToCamel(row) {
   return {
     id: row.id,
     firebaseUid: row.firebase_uid,
+    role: row.role,
     firstName: row.first_name,
     middleName: row.middle_name,
     lastName: row.last_name,

@@ -1,6 +1,8 @@
 export interface UserProfile {
   id?: string;
   firebaseUid: string;
+  role: 'USER' | 'ADMIN';
+  email: string;
   firstName: string;
   middleName?: string;
   lastName: string;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { UserProfile, BookingEvent, YogaClass } from '../types/user';
 
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // User Profile Services
 export const createUserProfile = async (profile: UserProfile): Promise<UserProfile> => {

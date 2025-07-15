@@ -118,6 +118,7 @@ const ProfileSetup: React.FC<ProfileSetupProps> = ({ onComplete }) => {
 
       const profileData: UserProfile = {
         firebaseUid: user.uid,
+        role: 'USER', // Default role, can be changed later
         firstName: formData.firstName!,
         middleName: formData.middleName,
         lastName: formData.lastName!,

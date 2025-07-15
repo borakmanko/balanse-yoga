@@ -6,6 +6,7 @@ USE balanse_yoga;
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     firebase_uid VARCHAR(255) UNIQUE NOT NULL,
+    role ENUM('USER', 'ADMIN', 'INSTRUCTOR', 'PREMIUM_USER') DEFAULT 'USER',
     first_name VARCHAR(100) NOT NULL,
     middle_name VARCHAR(100),
     last_name VARCHAR(100) NOT NULL,
